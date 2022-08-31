@@ -1,6 +1,7 @@
 package com.example.naviassignment.di
 
 import com.example.naviassignment.api.ApiServiceInterface
+import com.example.naviassignment.ui.viewModel.GitViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -10,7 +11,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val viewModelModule = module { viewModel {} }
+val viewModelModule = module { viewModel { GitViewModel(get()) } }
 
 val repositoryModule = module {
     single {}
