@@ -1,6 +1,7 @@
 package com.example.naviassignment.di
 
-import com.example.naviassignment.api.ApiServiceInterface
+import com.example.naviassignment.api.ApiConstants
+import com.example.naviassignment.api.ApiService
 import com.example.naviassignment.ui.viewModel.GitViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -17,8 +18,8 @@ val repositoryModule = module {
     single {}
 }
 val apiModule = module {
-    fun provideApiService(retrofit: Retrofit): ApiServiceInterface {
-        return retrofit.create(ApiServiceInterface::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
     single { provideApiService(get()) }
 
@@ -30,13 +31,18 @@ val apiModule = module {
 
         fun provideHttpClient(): OkHttpClient {
             val okHttpClientBuilder = OkHttpClient.Builder()
-
+            /*.addInterceptor { chain ->
+                val newRequest = chain.request().newBuilder().addHeader(
+                    "Authorization", "token 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"
+                ).addHeader("Accept", "application/vnd.github+json").build()
+                chain.proceed(newRequest)
+            }*/
             return okHttpClientBuilder.build()
         }
 
         fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit {
             return Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl(ApiConstants.Url.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(factory))
                 .client(client)
                 .build()

@@ -1,6 +1,6 @@
-package com.example.freenow.ui.repository
+package com.example.naviassignment.ui.repository
 
-import com.example.freenow.utils.NetworkResource
+import com.example.naviassignment.utils.NetworkResource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
