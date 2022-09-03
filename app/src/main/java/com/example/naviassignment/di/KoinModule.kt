@@ -2,6 +2,7 @@ package com.example.naviassignment.di
 
 import com.example.naviassignment.api.ApiConstants
 import com.example.naviassignment.api.ApiService
+import com.example.naviassignment.ui.repository.GitRepository
 import com.example.naviassignment.ui.viewModel.GitViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -15,7 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 val viewModelModule = module { viewModel { GitViewModel(get()) } }
 
 val repositoryModule = module {
-    single {}
+    single {
+        GitRepository(get())
+    }
 }
 val apiModule = module {
     fun provideApiService(retrofit: Retrofit): ApiService {

@@ -21,6 +21,6 @@ abstract class BaseRepository {
     inline fun <reified T> processForError(
         throwable: Throwable
     ): NetworkResource<T> {
-        return NetworkResource.error(throwable, null)
+        return NetworkResource.failure(throwable)
     }
 }
