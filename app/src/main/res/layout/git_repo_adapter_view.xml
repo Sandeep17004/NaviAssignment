@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Business TalksTopic of the audio room goes to 2 lines" />
+            tools:text="Commit Message" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivCommitAuthor"
@@ -49,9 +49,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_8sdp"
-            android:ellipsize="end"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLines="1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:text="@{modelData.creatorName}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/ivCommitAuthor"
