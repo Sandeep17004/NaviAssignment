@@ -1,5 +1,4 @@
 package com.example.naviassignment.api
 
-interface ApiServiceInterface {
-
+class ApiNetworkService {
 }
