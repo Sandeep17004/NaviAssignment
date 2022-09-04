@@ -5,6 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="showLoading"
+            type="Boolean" />
+
+        <variable
+            name="noDataFound"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,14 +21,39 @@
         android:layout_height="match_parent"
         tools:context=".ui.activity.MainActivity">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNoDataFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:text="@string/no_commits"
+            android:visibility="@{noDataFound==true?View.VISIBLE:View.GONE,default=gone}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/yellow"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="@{showLoading==true?View.VISIBLE:View.GONE, default=visible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGitData"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{noDataFound==true?View.GONE:View.VISIBLE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

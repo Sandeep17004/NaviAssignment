@@ -1,11 +1,8 @@
 package com.example.naviassignment
 
 import android.app.Application
-import com.example.naviassignment.di.apiModule
-import com.example.naviassignment.di.repositoryModule
-import com.example.naviassignment.di.retrofitModule
+import com.example.naviassignment.di.*
 
-import com.example.naviassignment.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,7 +13,7 @@ class MainApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MainApplication)
-            modules(listOf(repositoryModule, viewModelModule, apiModule,retrofitModule))
+            modules(koinRepository)
         }
     }
 }

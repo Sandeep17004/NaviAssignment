@@ -10,8 +10,9 @@ class ApiGitRepositoryMapper : Mapper<ApiGitResponse, GitResponse> {
                 title = model.title,
                 createdDate = model.createdAt,
                 closedDate = model.closedAt,
-                userName = model.user?.login,
-                userImage = model.user?.avatarUrl
+                creatorName = model.user?.login,
+                creatorProfileImage = model.user?.avatarUrl,
+                id = model.id
             )
         } catch (error: Exception) {
             throw Exception()
