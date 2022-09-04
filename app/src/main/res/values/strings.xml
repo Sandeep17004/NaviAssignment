@@ -2,6 +2,6 @@
     <string name="app_name">NaviAssignment</string>
     <string name="base_url">https://api.github.com/</string>
     <string name="no_commits">No Commits Found. Retry?</string>
-    <string name="created_on">created on %s</string>
-    <string name="closed_on">closed on %s</string>
+    <string name="created_on">created on %s at %s</string>
+    <string name="closed_on">closed on %s at %s</string>
 </resources>
