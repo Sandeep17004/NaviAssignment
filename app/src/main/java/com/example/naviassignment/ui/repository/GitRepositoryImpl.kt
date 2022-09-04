@@ -10,9 +10,9 @@ class GitRepositoryImpl(
     private val networkService: ApiService,
     private val responseMapper: ApiGitRepositoryMapper
 ) : BaseRepository(), GitRepository {
-    override suspend fun loadGitList(state: String): NetworkResource<List<GitResponse>> {
+    override suspend fun loadClosedGitCommitsList(state: String): NetworkResource<List<GitResponse>> {
         return safeApiCall(Dispatchers.IO) {
-            networkService.loadClosedRepoList(state).map { responseMapper.toDomain(it) }
+            networkService.loadClosedGitCommitsList(state).map { responseMapper.toDomain(it) }
         }
     }
 }
