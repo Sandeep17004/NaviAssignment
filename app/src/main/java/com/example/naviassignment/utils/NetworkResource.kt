@@ -1,45 +1,38 @@
 package com.example.naviassignment.utils
 
-class NetworkResource<out T>(val value: Any?) {
-
-    val isSuccess: Boolean get() = value !is Failure
-
-    val isFailure: Boolean get() = value is Failure
-
-    fun exceptionOrNull(): Throwable? = when (value) {
-        is Failure -> value.exception
-        else -> null
-    }
+class NetworkResource<out T>(
+    var status: Status,
+    val data: T?,
+    val throwable
+    : Throwable?
+) {
+    val isSuccess: Boolean get() = status == Status.SUCCESS
+    val isFailure: Boolean get() = status == Status.ERROR
 
     companion object {
-        fun <T> success(value: T): NetworkResource<T> = NetworkResource(value)
+        fun <T> success(data: T?): NetworkResource<T> {
+            return NetworkResource(Status.SUCCESS, data, null)
+        }
 
-        fun <T> failure(exception: Throwable): NetworkResource<T> =
-            NetworkResource(createFailure(exception))
+        fun <T> error(msg: Throwable? = null, data: T? = null): NetworkResource<T> {
+            return NetworkResource(Status.ERROR, data, msg)
+        }
+
+        fun <T> loading(data: T? = null): NetworkResource<T> {
+            return NetworkResource(Status.LOADING, data, null)
+        }
     }
 
-    class Failure(val exception: Throwable) {
-        override fun equals(other: Any?): Boolean = other is Failure && exception == other.exception
-        override fun hashCode(): Int = exception.hashCode()
-        override fun toString(): String = "Failure($exception)"
+    inline fun <R, T> NetworkResource<T>.map(transform: (value: T) -> R): NetworkResource<R> {
+        return when {
+            isSuccess -> success(transform(data as T))
+            else -> error(throwable)
+        }
     }
-}
 
-private fun createFailure(exception: Throwable): Any = NetworkResource.Failure(exception)
-
-inline fun <R, T> NetworkResource<T>.map(transform: (value: T) -> R): NetworkResource<R> {
-    return when {
-        isSuccess -> NetworkResource.success(transform(value as T))
-        else -> NetworkResource(value)
+    enum class Status {
+        SUCCESS,
+        ERROR,
+        LOADING
     }
-}
-
-inline fun <T> NetworkResource<T>.onFailure(action: (exception: Throwable) -> Unit): NetworkResource<T> {
-    exceptionOrNull()?.let { action(it) }
-    return this
-}
-
-inline fun <T> NetworkResource<T>.onSuccess(action: (value: T) -> Unit): NetworkResource<T> {
-    if (isSuccess) action(value as T)
-    return this
 }

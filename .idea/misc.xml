@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_rounded_20_granite_dark.xml" value="0.168" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/git_repo_adapter_view.xml" value="0.33605072463768115" />
       </map>
     </option>
   </component>
