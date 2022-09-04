@@ -4,5 +4,5 @@ import com.example.naviassignment.data.GitResponse
 import com.example.naviassignment.utils.NetworkResource
 
 interface GitRepository {
-    suspend fun loadGitList(state: String): NetworkResource<List<GitResponse>>
+    suspend fun loadClosedGitCommitsList(state: String): NetworkResource<List<GitResponse>>
 }

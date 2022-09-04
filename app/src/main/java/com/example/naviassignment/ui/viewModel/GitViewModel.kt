@@ -19,13 +19,13 @@ class GitViewModel(private val repository: GitRepository) : ViewModel() {
     }
 
     init {
-        loadRepoList()
+        loadClosedGitCommitsList()
     }
 
-    fun loadRepoList() {
+    fun loadClosedGitCommitsList() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                pullRequestList.postValue(repository.loadGitList(COMMIT_TYPE_CLOSED))
+                pullRequestList.postValue(repository.loadClosedGitCommitsList(COMMIT_TYPE_CLOSED))
             }
         }
     }

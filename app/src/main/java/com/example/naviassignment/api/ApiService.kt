@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET(ApiConstants.Url.REPO_URL)
-    suspend fun loadClosedRepoList(@Query("state") state: String): List<ApiGitResponse>
+    suspend fun loadClosedGitCommitsList(@Query("state") state: String): List<ApiGitResponse>
 }

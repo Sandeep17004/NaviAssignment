@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         screenBinding.apply {
             tvNoDataFound.setOnClickListener {
                 screenBinding.noDataFound = false
-                gitViewModel.loadRepoList()
+                gitViewModel.loadClosedGitCommitsList()
             }
             rvGitData.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
