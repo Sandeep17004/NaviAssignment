@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="modelData"
+            type="com.example.naviassignment.data.GitResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeMyRoomContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        android:background="@drawable/background_rounded_20_granite_dark">
+
+        <TextView
+            android:id="@+id/tvMergeTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_32sdp"
+            android:layout_marginVertical="@dimen/_6sdp"
+            android:alpha="0.7"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{modelData.title}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Business TalksTopic of the audio room goes to 2 lines" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivCommitAuthor"
+            commitAuthorImage="@{modelData.creatorProfileImage}"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginVertical="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="@+id/tvMergeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvMergeTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCommitAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:ellipsize="end"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:text="@{modelData.creatorName}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCommitAuthor"
+            app:layout_constraintStart_toEndOf="@+id/ivCommitAuthor"
+            app:layout_constraintTop_toTopOf="@+id/ivCommitAuthor"
+            tools:text="Sandeep17004" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCommitCreationTimeLine"
+            formatServerDate="@{modelData.createdDate}"
+            isCreated="@{true}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/tvCommitClosureTimeLine"
+            app:layout_constraintStart_toStartOf="@+id/ivCommitAuthor"
+            app:layout_constraintTop_toBottomOf="@+id/ivCommitAuthor"
+            tools:text="created on: 17/04/1990" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCommitClosureTimeLine"
+            formatServerDate="@{modelData.closedDate}"
+            isCreated="@{false}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvCommitCreationTimeLine"
+            tools:text="closed on: 17/04/1990" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

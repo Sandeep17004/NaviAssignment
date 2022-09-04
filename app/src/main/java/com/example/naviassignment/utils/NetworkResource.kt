@@ -1,6 +1,6 @@
 package com.example.naviassignment.utils
 
-data class NetworkResource<out T>(
+class NetworkResource<out T>(
     var status: Status,
     val data: T?,
     val throwable
