@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         screenBinding.apply {
             tvNoDataFound.setOnClickListener {
                 screenBinding.noDataFound = false
-                gitViewModel.loadClosedGitCommitsList()
+                gitViewModel.loadClosedGitMergeRequestList()
             }
             rvGitData.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        gitViewModel.getClosedList().observe(this) { resObj ->
+        gitViewModel.getClosedGitMergeRequestLiveData().observe(this) { resObj ->
             when (resObj.status) {
                 NetworkResource.Status.LOADING -> {
                     screenBinding.showLoading = true

@@ -12,20 +12,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GitViewModel(private val repository: GitRepository) : ViewModel() {
-    private val pullRequestList = MutableLiveData<NetworkResource<List<GitResponse>>>()
+    private val closedMergeRequestList = MutableLiveData<NetworkResource<List<GitResponse>>>()
 
-    fun getClosedList(): MutableLiveData<NetworkResource<List<GitResponse>>> {
-        return pullRequestList
+    fun getClosedGitMergeRequestLiveData(): MutableLiveData<NetworkResource<List<GitResponse>>> {
+        return closedMergeRequestList
     }
 
     init {
-        loadClosedGitCommitsList()
+        loadClosedGitMergeRequestList()
     }
 
-    fun loadClosedGitCommitsList() {
+    fun loadClosedGitMergeRequestList() {
+        closedMergeRequestList.postValue(NetworkResource.loading())
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                pullRequestList.postValue(repository.loadClosedGitCommitsList(COMMIT_TYPE_CLOSED))
+                closedMergeRequestList.postValue(
+                    repository.loadClosedGitMergeRequestList(
+                        COMMIT_TYPE_CLOSED
+                    )
+                )
             }
         }
     }

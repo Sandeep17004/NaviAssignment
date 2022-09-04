@@ -1,7 +1,7 @@
 package com.example.naviassignment.di
 
 import com.example.naviassignment.R
-import com.example.naviassignment.api.ApiService
+import com.example.naviassignment.api.ApiServiceInterface
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,8 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val ApiModule = module {
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiServiceInterface {
+        return retrofit.create(ApiServiceInterface::class.java)
     }
     single { provideApiService(get()) }
 }

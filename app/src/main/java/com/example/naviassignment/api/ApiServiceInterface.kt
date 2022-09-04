@@ -4,7 +4,7 @@ import com.example.naviassignment.data.ApiGitResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ApiService {
+interface ApiServiceInterface {
     @GET(ApiConstants.Url.REPO_URL)
-    suspend fun loadClosedGitCommitsList(@Query("state") state: String): List<ApiGitResponse>
+    suspend fun loadClosedGitMergeRequestList(@Query("state") state: String): List<ApiGitResponse>
 }
