@@ -60,19 +60,6 @@ class GitRepositoryTest : BaseServiceTest() {
         Assert.assertNotNull(viewModel)
     }
 
-    @Test
-    fun testLoadAllClosedGitPullRequestsFromServerResponseOnSuccess() = runTest {
-        val viewModelResponse = Mockito.mock(GitResponse::class.java)
-        val data = NetworkResource.success(listOf(viewModelResponse))
-        Mockito.`when`(
-            gitRepository.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
-        ).thenReturn(data)
-        viewModel.loadClosedGitMergeRequestList()
-        Mockito.verify(observerClosedPullRequestsLiveData)
-            .onChanged(NetworkResource.loading(null))
-        Mockito.verify(observerClosedPullRequestsLiveData).onChanged(data)
-    }
-
     @After
     fun tearDown() {
         viewModel.getClosedGitMergeRequestLiveData()

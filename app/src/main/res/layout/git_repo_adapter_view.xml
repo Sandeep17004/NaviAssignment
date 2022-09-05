@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/_4sdp"
         android:background="@drawable/background_rounded_20_granite_dark">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvMergeTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

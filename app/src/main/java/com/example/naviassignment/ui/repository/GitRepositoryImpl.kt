@@ -5,7 +5,6 @@ import com.example.naviassignment.data.GitResponse
 import com.example.naviassignment.data.mapper.ApiGitRepositoryMapper
 import com.example.naviassignment.utils.NetworkResource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 
 class GitRepositoryImpl(
     private val networkService: ApiServiceInterface,
@@ -14,7 +13,8 @@ class GitRepositoryImpl(
 ) : BaseRepository(), GitRepository {
     override suspend fun loadClosedGitMergeRequestList(state: String): NetworkResource<List<GitResponse>> {
         return safeApiCall(ioDispatcher) {
-            networkService.loadClosedGitMergeRequestList(state).map { responseMapper.toDomain(it) }
+            networkService.loadClosedGitMergeRequestList(state)
+                .map { responseMapper.toDomain(it) }
         }
     }
 }

@@ -13,10 +13,11 @@ import com.example.naviassignment.databinding.GitRepoAdapterViewBinding
 class GitRepoAdapter : ListAdapter<GitResponse, GitRepoAdapter.ViewHolder>(DiffCallBack()) {
     private lateinit var viewBinding: GitRepoAdapterViewBinding
 
-    inner class ViewHolder(viewBinding: GitRepoAdapterViewBinding) :
+    inner class ViewHolder(private val viewBinding: GitRepoAdapterViewBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(holderData: GitResponse) {
             viewBinding.modelData = holderData
+            viewBinding.executePendingBindings()
         }
     }
 
@@ -41,6 +42,7 @@ class GitRepoAdapter : ListAdapter<GitResponse, GitRepoAdapter.ViewHolder>(DiffC
         override fun areContentsTheSame(
             oldItem: GitResponse,
             newItem: GitResponse
-        ): Boolean = oldItem.id == newItem.id
+        ): Boolean =
+            oldItem.id == newItem.id
     }
 }
