@@ -22,10 +22,6 @@ class GitViewModel(
         return closedMergeRequestLiveData
     }
 
-    init {
-        loadClosedGitMergeRequestList()
-    }
-
     fun loadClosedGitMergeRequestList() {
         closedMergeRequestLiveData.postValue(NetworkResource.loading())
         viewModelScope.launch {

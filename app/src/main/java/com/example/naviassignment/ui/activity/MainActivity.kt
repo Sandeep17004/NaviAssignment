@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         observeViewModel()
+        gitViewModel.loadClosedGitMergeRequestList()
     }
 
     private fun observeViewModel() {
