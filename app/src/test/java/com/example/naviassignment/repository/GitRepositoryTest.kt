@@ -28,7 +28,8 @@ import org.mockito.MockitoAnnotations
 @RunWith(JUnit4::class)
 class GitRepositoryTest : BaseServiceTest() {
 
-    private val gitRepository = Mockito.mock(GitRepository::class.java)
+    @Mock
+    lateinit var gitRepository: GitRepository
 
     private lateinit var viewModel: GitViewModel
 
@@ -39,23 +40,16 @@ class GitRepositoryTest : BaseServiceTest() {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         viewModel = GitViewModel(
-            gitRepository
+            gitRepository, coroutineTestRule.testDispatcher
         )
         viewModel.getClosedGitMergeRequestLiveData()
             .observeForever(observerClosedPullRequestsLiveData)
-        Dispatchers.setMain(Dispatchers.IO)
-    }
-
-    @After
-    fun tearDown() {
-        viewModel.getClosedGitMergeRequestLiveData()
-            .removeObserver(observerClosedPullRequestsLiveData)
-        Dispatchers.resetMain()
+        Dispatchers.setMain(coroutineTestRule.testDispatcher)
     }
 
     @Test
     fun loadClosedGitMergeRequestLiveData() {
-        runBlocking {
+        runTest {
             val gitClosedMergeRequestList = viewModel.getClosedGitMergeRequestLiveData()
             Assert.assertNotNull(gitClosedMergeRequestList)
         }
@@ -67,15 +61,23 @@ class GitRepositoryTest : BaseServiceTest() {
     }
 
     @Test
-    fun testLoadAllClosedGitPullRequestsFromServerResponseOnSuccess() {
+    fun testLoadAllClosedGitPullRequestsFromServerResponseOnSuccess() = runTest {
         val viewModelResponse = Mockito.mock(GitResponse::class.java)
-        runTest {
-            Mockito.`when`(
-                gitRepository.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
-            ).thenReturn(NetworkResource.success(listOf(viewModelResponse)))
-            viewModel.loadClosedGitMergeRequestList()
-            Mockito.verify(observerClosedPullRequestsLiveData)
-                .onChanged(NetworkResource.loading(null))
-        }
+        val data = NetworkResource.success(listOf(viewModelResponse))
+        Mockito.`when`(
+            gitRepository.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
+        ).thenReturn(data)
+        viewModel.loadClosedGitMergeRequestList()
+        Mockito.verify(observerClosedPullRequestsLiveData)
+            .onChanged(NetworkResource.loading(null))
+        Mockito.verify(observerClosedPullRequestsLiveData).onChanged(data)
     }
+
+    @After
+    fun tearDown() {
+        viewModel.getClosedGitMergeRequestLiveData()
+            .removeObserver(observerClosedPullRequestsLiveData)
+        Dispatchers.resetMain()
+    }
+
 }
