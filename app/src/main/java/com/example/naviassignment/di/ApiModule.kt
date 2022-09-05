@@ -2,6 +2,8 @@ package com.example.naviassignment.di
 
 import com.example.naviassignment.R
 import com.example.naviassignment.api.ApiServiceInterface
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import kotlin.math.sin
 
 val ApiModule = module {
     fun provideApiService(retrofit: Retrofit): ApiServiceInterface {
@@ -45,6 +48,10 @@ val RetrofitModule = module {
             .build()
     }
 
+    fun provideIODispatcher(): CoroutineDispatcher {
+        return Dispatchers.IO
+    }
+    single { provideIODispatcher() }
     single { provideHttpClient() }
     single {
         val baseurl = androidContext().getString(R.string.base_url)
