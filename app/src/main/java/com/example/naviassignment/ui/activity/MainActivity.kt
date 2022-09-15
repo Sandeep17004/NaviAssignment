@@ -10,6 +10,7 @@ import com.example.naviassignment.databinding.ActivityMainBinding
 import com.example.naviassignment.ui.adapter.GitRepoAdapter
 import com.example.naviassignment.ui.viewModel.GitViewModel
 import com.example.naviassignment.utils.NetworkResource
+import com.example.naviassignment.utils.Util
 import com.example.naviassignment.utils.VerticalPaddingItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,7 +40,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         observeViewModel()
-        gitViewModel.loadClosedGitMergeRequestList()
+        if (Util.isOnline(this)) {
+            gitViewModel.loadClosedGitMergeRequestList()
+        } else {
+            Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun observeViewModel() {
