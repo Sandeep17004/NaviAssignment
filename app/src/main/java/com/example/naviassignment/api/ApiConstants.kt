@@ -2,6 +2,6 @@ package com.example.naviassignment.api
 
 object ApiConstants {
     object Url {
-        const val REPO_URL = "repos/Sandeep17004/NaviAssignment/pulls"
+        const val REPO_URL = "repos/revanced/revanced-patches/pulls"
     }
 }

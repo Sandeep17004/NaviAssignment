@@ -35,9 +35,9 @@ class GitCommitListServiceTest : BaseServiceTest() {
         runBlocking {
             val response = Mockito.mock(ApiGitResponse::class.java)
             Mockito.`when`(
-                apiServiceInterface.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
+                apiServiceInterface.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED,20,1)
             ).thenReturn(listOf(response))
-            val data = apiServiceInterface.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
+            val data = apiServiceInterface.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED,20,1)
             TestCase.assertTrue(data == listOf(response))
         }
     }

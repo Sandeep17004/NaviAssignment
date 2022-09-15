@@ -11,9 +11,13 @@ class GitRepositoryImpl(
     private val responseMapper: ApiGitRepositoryMapper,
     private var ioDispatcher: CoroutineDispatcher
 ) : BaseRepository(), GitRepository {
-    override suspend fun loadClosedGitMergeRequestList(state: String): NetworkResource<List<GitResponse>> {
+    override suspend fun loadClosedGitMergeRequestList(
+        state: String,
+        itemPerPage: Int,
+        pageNumber: Int
+    ): NetworkResource<List<GitResponse>> {
         return safeApiCall(ioDispatcher) {
-            networkService.loadClosedGitMergeRequestList(state)
+            networkService.loadClosedGitMergeRequestList(state, itemPerPage, pageNumber)
                 .map { responseMapper.toDomain(it) }
         }
     }
