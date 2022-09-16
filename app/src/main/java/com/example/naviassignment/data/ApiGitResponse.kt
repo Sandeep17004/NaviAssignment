@@ -4,37 +4,29 @@ import com.google.gson.annotations.SerializedName
 
 data class ApiGitResponse(
     @SerializedName("active_lock_reason")
-    val activeLockReason: String?,
-    @SerializedName("additions")
-    val additions: Int?,
+    val activeLockReason: Any?,
     @SerializedName("assignee")
-    val assignee: Assignee?,
+    val assignee: Any?,
     @SerializedName("assignees")
-    val assignees: List<Assignee?>?,
+    val assignees: List<Any?>?,
     @SerializedName("author_association")
     val authorAssociation: String?,
     @SerializedName("auto_merge")
     val autoMerge: Any?,
     @SerializedName("base")
     val base: Base?,
+    @SerializedName("id")
+    val id: Int?,
     @SerializedName("body")
     val body: String?,
-    @SerializedName("changed_files")
-    val changedFiles: Int?,
     @SerializedName("closed_at")
     val closedAt: String?,
-    @SerializedName("comments")
-    val comments: Int?,
     @SerializedName("comments_url")
     val commentsUrl: String?,
-    @SerializedName("commits")
-    val commits: Int?,
     @SerializedName("commits_url")
     val commitsUrl: String?,
     @SerializedName("created_at")
     val createdAt: String?,
-    @SerializedName("deletions")
-    val deletions: Int?,
     @SerializedName("diff_url")
     val diffUrl: String?,
     @SerializedName("draft")
@@ -43,8 +35,6 @@ data class ApiGitResponse(
     val head: Head?,
     @SerializedName("html_url")
     val htmlUrl: String?,
-    @SerializedName("id")
-    val id: Int?,
     @SerializedName("issue_url")
     val issueUrl: String?,
     @SerializedName("labels")
@@ -53,38 +43,24 @@ data class ApiGitResponse(
     val links: Links?,
     @SerializedName("locked")
     val locked: Boolean?,
-    @SerializedName("maintainer_can_modify")
-    val maintainerCanModify: Boolean?,
     @SerializedName("merge_commit_sha")
     val mergeCommitSha: String?,
-    @SerializedName("mergeable")
-    val mergeable: Boolean?,
-    @SerializedName("mergeable_state")
-    val mergeableState: String?,
-    @SerializedName("merged")
-    val merged: Boolean?,
     @SerializedName("merged_at")
     val mergedAt: String?,
-    @SerializedName("merged_by")
-    val mergedBy: MergedBy?,
     @SerializedName("milestone")
-    val milestone: Milestone?,
+    val milestone: Any?,
     @SerializedName("node_id")
     val nodeId: String?,
     @SerializedName("number")
     val number: Int?,
     @SerializedName("patch_url")
     val patchUrl: String?,
-    @SerializedName("rebaseable")
-    val rebaseable: Boolean?,
     @SerializedName("requested_reviewers")
-    val requestedReviewers: List<RequestedReviewer?>?,
+    val requestedReviewers: List<Any?>?,
     @SerializedName("requested_teams")
-    val requestedTeams: List<RequestedTeam?>?,
+    val requestedTeams: List<Any?>?,
     @SerializedName("review_comment_url")
     val reviewCommentUrl: String?,
-    @SerializedName("review_comments")
-    val reviewComments: Int?,
     @SerializedName("review_comments_url")
     val reviewCommentsUrl: String?,
     @SerializedName("state")
@@ -100,44 +76,6 @@ data class ApiGitResponse(
     @SerializedName("user")
     val user: User?
 ) {
-    data class Assignee(
-        @SerializedName("avatar_url")
-        val avatarUrl: String?,
-        @SerializedName("events_url")
-        val eventsUrl: String?,
-        @SerializedName("followers_url")
-        val followersUrl: String?,
-        @SerializedName("following_url")
-        val followingUrl: String?,
-        @SerializedName("gists_url")
-        val gistsUrl: String?,
-        @SerializedName("gravatar_id")
-        val gravatarId: String?,
-        @SerializedName("html_url")
-        val htmlUrl: String?,
-        @SerializedName("id")
-        val id: Int?,
-        @SerializedName("login")
-        val login: String?,
-        @SerializedName("node_id")
-        val nodeId: String?,
-        @SerializedName("organizations_url")
-        val organizationsUrl: String?,
-        @SerializedName("received_events_url")
-        val receivedEventsUrl: String?,
-        @SerializedName("repos_url")
-        val reposUrl: String?,
-        @SerializedName("site_admin")
-        val siteAdmin: Boolean?,
-        @SerializedName("starred_url")
-        val starredUrl: String?,
-        @SerializedName("subscriptions_url")
-        val subscriptionsUrl: String?,
-        @SerializedName("type")
-        val type: String?,
-        @SerializedName("url")
-        val url: String?
-    )
     data class Base(
         @SerializedName("label")
         val label: String?,
@@ -151,12 +89,8 @@ data class ApiGitResponse(
         val user: User?
     ) {
         data class Repo(
-            @SerializedName("allow_merge_commit")
-            val allowMergeCommit: Boolean?,
-            @SerializedName("allow_rebase_merge")
-            val allowRebaseMerge: Boolean?,
-            @SerializedName("allow_squash_merge")
-            val allowSquashMerge: Boolean?,
+            @SerializedName("allow_forking")
+            val allowForking: Boolean?,
             @SerializedName("archive_url")
             val archiveUrl: String?,
             @SerializedName("archived")
@@ -231,6 +165,8 @@ data class ApiGitResponse(
             val htmlUrl: String?,
             @SerializedName("id")
             val id: Int?,
+            @SerializedName("is_template")
+            val isTemplate: Boolean?,
             @SerializedName("issue_comment_url")
             val issueCommentUrl: String?,
             @SerializedName("issue_events_url")
@@ -242,7 +178,7 @@ data class ApiGitResponse(
             @SerializedName("labels_url")
             val labelsUrl: String?,
             @SerializedName("language")
-            val language: Any?,
+            val language: String?,
             @SerializedName("languages_url")
             val languagesUrl: String?,
             @SerializedName("license")
@@ -252,7 +188,7 @@ data class ApiGitResponse(
             @SerializedName("milestones_url")
             val milestonesUrl: String?,
             @SerializedName("mirror_url")
-            val mirrorUrl: String?,
+            val mirrorUrl: Any?,
             @SerializedName("name")
             val name: String?,
             @SerializedName("node_id")
@@ -265,8 +201,6 @@ data class ApiGitResponse(
             val openIssuesCount: Int?,
             @SerializedName("owner")
             val owner: Owner?,
-            @SerializedName("permissions")
-            val permissions: Permissions?,
             @SerializedName("private")
             val `private`: Boolean?,
             @SerializedName("pulls_url")
@@ -295,8 +229,6 @@ data class ApiGitResponse(
             val tagsUrl: String?,
             @SerializedName("teams_url")
             val teamsUrl: String?,
-            @SerializedName("temp_clone_token")
-            val tempCloneToken: String?,
             @SerializedName("topics")
             val topics: List<String?>?,
             @SerializedName("trees_url")
@@ -305,12 +237,16 @@ data class ApiGitResponse(
             val updatedAt: String?,
             @SerializedName("url")
             val url: String?,
+            @SerializedName("visibility")
+            val visibility: String?,
             @SerializedName("watchers")
             val watchers: Int?,
             @SerializedName("watchers_count")
-            val watchersCount: Int?
+            val watchersCount: Int?,
+            @SerializedName("web_commit_signoff_required")
+            val webCommitSignoffRequired: Boolean?
         ) {
-             data class License(
+            data class License(
                 @SerializedName("key")
                 val key: String?,
                 @SerializedName("name")
@@ -323,7 +259,7 @@ data class ApiGitResponse(
                 val url: String?
             )
 
-             data class Owner(
+            data class Owner(
                 @SerializedName("avatar_url")
                 val avatarUrl: String?,
                 @SerializedName("events_url")
@@ -361,18 +297,9 @@ data class ApiGitResponse(
                 @SerializedName("url")
                 val url: String?
             )
-
-             data class Permissions(
-                @SerializedName("admin")
-                val admin: Boolean?,
-                @SerializedName("pull")
-                val pull: Boolean?,
-                @SerializedName("push")
-                val push: Boolean?
-            )
         }
 
-         data class User(
+        data class User(
             @SerializedName("avatar_url")
             val avatarUrl: String?,
             @SerializedName("events_url")
@@ -427,12 +354,6 @@ data class ApiGitResponse(
         data class Repo(
             @SerializedName("allow_forking")
             val allowForking: Boolean?,
-            @SerializedName("allow_merge_commit")
-            val allowMergeCommit: Boolean?,
-            @SerializedName("allow_rebase_merge")
-            val allowRebaseMerge: Boolean?,
-            @SerializedName("allow_squash_merge")
-            val allowSquashMerge: Boolean?,
             @SerializedName("archive_url")
             val archiveUrl: String?,
             @SerializedName("archived")
@@ -507,6 +428,8 @@ data class ApiGitResponse(
             val htmlUrl: String?,
             @SerializedName("id")
             val id: Int?,
+            @SerializedName("is_template")
+            val isTemplate: Boolean?,
             @SerializedName("issue_comment_url")
             val issueCommentUrl: String?,
             @SerializedName("issue_events_url")
@@ -518,7 +441,7 @@ data class ApiGitResponse(
             @SerializedName("labels_url")
             val labelsUrl: String?,
             @SerializedName("language")
-            val language: Any?,
+            val language: String?,
             @SerializedName("languages_url")
             val languagesUrl: String?,
             @SerializedName("license")
@@ -528,7 +451,7 @@ data class ApiGitResponse(
             @SerializedName("milestones_url")
             val milestonesUrl: String?,
             @SerializedName("mirror_url")
-            val mirrorUrl: String?,
+            val mirrorUrl: Any?,
             @SerializedName("name")
             val name: String?,
             @SerializedName("node_id")
@@ -541,8 +464,6 @@ data class ApiGitResponse(
             val openIssuesCount: Int?,
             @SerializedName("owner")
             val owner: Owner?,
-            @SerializedName("permissions")
-            val permissions: Permissions?,
             @SerializedName("private")
             val `private`: Boolean?,
             @SerializedName("pulls_url")
@@ -571,22 +492,24 @@ data class ApiGitResponse(
             val tagsUrl: String?,
             @SerializedName("teams_url")
             val teamsUrl: String?,
-            @SerializedName("temp_clone_token")
-            val tempCloneToken: String?,
             @SerializedName("topics")
-            val topics: List<String?>?,
+            val topics: List<Any?>?,
             @SerializedName("trees_url")
             val treesUrl: String?,
             @SerializedName("updated_at")
             val updatedAt: String?,
             @SerializedName("url")
             val url: String?,
+            @SerializedName("visibility")
+            val visibility: String?,
             @SerializedName("watchers")
             val watchers: Int?,
             @SerializedName("watchers_count")
-            val watchersCount: Int?
+            val watchersCount: Int?,
+            @SerializedName("web_commit_signoff_required")
+            val webCommitSignoffRequired: Boolean?
         ) {
-             data class License(
+            data class License(
                 @SerializedName("key")
                 val key: String?,
                 @SerializedName("name")
@@ -599,7 +522,7 @@ data class ApiGitResponse(
                 val url: String?
             )
 
-             data class Owner(
+            data class Owner(
                 @SerializedName("avatar_url")
                 val avatarUrl: String?,
                 @SerializedName("events_url")
@@ -637,18 +560,9 @@ data class ApiGitResponse(
                 @SerializedName("url")
                 val url: String?
             )
-
-             data class Permissions(
-                @SerializedName("admin")
-                val admin: Boolean?,
-                @SerializedName("pull")
-                val pull: Boolean?,
-                @SerializedName("push")
-                val push: Boolean?
-            )
         }
 
-         data class User(
+        data class User(
             @SerializedName("avatar_url")
             val avatarUrl: String?,
             @SerializedName("events_url")
@@ -688,15 +602,15 @@ data class ApiGitResponse(
         )
     }
 
-     data class Label(
+    data class Label(
         @SerializedName("color")
         val color: String?,
         @SerializedName("default")
         val default: Boolean?,
         @SerializedName("description")
-        val description: String?,
+        val description: Any?,
         @SerializedName("id")
-        val id: Int?,
+        val id: Long?,
         @SerializedName("name")
         val name: String?,
         @SerializedName("node_id")
@@ -705,7 +619,7 @@ data class ApiGitResponse(
         val url: String?
     )
 
-     data class Links(
+    data class Links(
         @SerializedName("comments")
         val comments: Comments?,
         @SerializedName("commits")
@@ -723,225 +637,48 @@ data class ApiGitResponse(
         @SerializedName("statuses")
         val statuses: Statuses?
     ) {
-         data class Comments(
+        data class Comments(
             @SerializedName("href")
             val href: String?
         )
 
-         data class Commits(
+        data class Commits(
             @SerializedName("href")
             val href: String?
         )
 
-         data class Html(
+        data class Html(
             @SerializedName("href")
             val href: String?
         )
 
-         data class Issue(
+        data class Issue(
             @SerializedName("href")
             val href: String?
         )
 
-         data class ReviewComment(
+        data class ReviewComment(
             @SerializedName("href")
             val href: String?
         )
 
-         data class ReviewComments(
+        data class ReviewComments(
             @SerializedName("href")
             val href: String?
         )
 
-         data class Self(
+        data class Self(
             @SerializedName("href")
             val href: String?
         )
 
-         data class Statuses(
+        data class Statuses(
             @SerializedName("href")
             val href: String?
         )
     }
 
-     data class MergedBy(
-        @SerializedName("avatar_url")
-        val avatarUrl: String?,
-        @SerializedName("events_url")
-        val eventsUrl: String?,
-        @SerializedName("followers_url")
-        val followersUrl: String?,
-        @SerializedName("following_url")
-        val followingUrl: String?,
-        @SerializedName("gists_url")
-        val gistsUrl: String?,
-        @SerializedName("gravatar_id")
-        val gravatarId: String?,
-        @SerializedName("html_url")
-        val htmlUrl: String?,
-        @SerializedName("id")
-        val id: Int?,
-        @SerializedName("login")
-        val login: String?,
-        @SerializedName("node_id")
-        val nodeId: String?,
-        @SerializedName("organizations_url")
-        val organizationsUrl: String?,
-        @SerializedName("received_events_url")
-        val receivedEventsUrl: String?,
-        @SerializedName("repos_url")
-        val reposUrl: String?,
-        @SerializedName("site_admin")
-        val siteAdmin: Boolean?,
-        @SerializedName("starred_url")
-        val starredUrl: String?,
-        @SerializedName("subscriptions_url")
-        val subscriptionsUrl: String?,
-        @SerializedName("type")
-        val type: String?,
-        @SerializedName("url")
-        val url: String?
-    )
-
-     data class Milestone(
-        @SerializedName("closed_at")
-        val closedAt: String?,
-        @SerializedName("closed_issues")
-        val closedIssues: Int?,
-        @SerializedName("created_at")
-        val createdAt: String?,
-        @SerializedName("creator")
-        val creator: Creator?,
-        @SerializedName("description")
-        val description: String?,
-        @SerializedName("due_on")
-        val dueOn: String?,
-        @SerializedName("html_url")
-        val htmlUrl: String?,
-        @SerializedName("id")
-        val id: Int?,
-        @SerializedName("labels_url")
-        val labelsUrl: String?,
-        @SerializedName("node_id")
-        val nodeId: String?,
-        @SerializedName("number")
-        val number: Int?,
-        @SerializedName("open_issues")
-        val openIssues: Int?,
-        @SerializedName("state")
-        val state: String?,
-        @SerializedName("title")
-        val title: String?,
-        @SerializedName("updated_at")
-        val updatedAt: String?,
-        @SerializedName("url")
-        val url: String?
-    ) {
-         data class Creator(
-            @SerializedName("avatar_url")
-            val avatarUrl: String?,
-            @SerializedName("events_url")
-            val eventsUrl: String?,
-            @SerializedName("followers_url")
-            val followersUrl: String?,
-            @SerializedName("following_url")
-            val followingUrl: String?,
-            @SerializedName("gists_url")
-            val gistsUrl: String?,
-            @SerializedName("gravatar_id")
-            val gravatarId: String?,
-            @SerializedName("html_url")
-            val htmlUrl: String?,
-            @SerializedName("id")
-            val id: Int?,
-            @SerializedName("login")
-            val login: String?,
-            @SerializedName("node_id")
-            val nodeId: String?,
-            @SerializedName("organizations_url")
-            val organizationsUrl: String?,
-            @SerializedName("received_events_url")
-            val receivedEventsUrl: String?,
-            @SerializedName("repos_url")
-            val reposUrl: String?,
-            @SerializedName("site_admin")
-            val siteAdmin: Boolean?,
-            @SerializedName("starred_url")
-            val starredUrl: String?,
-            @SerializedName("subscriptions_url")
-            val subscriptionsUrl: String?,
-            @SerializedName("type")
-            val type: String?,
-            @SerializedName("url")
-            val url: String?
-        )
-    }
-
-     data class RequestedReviewer(
-        @SerializedName("avatar_url")
-        val avatarUrl: String?,
-        @SerializedName("events_url")
-        val eventsUrl: String?,
-        @SerializedName("followers_url")
-        val followersUrl: String?,
-        @SerializedName("following_url")
-        val followingUrl: String?,
-        @SerializedName("gists_url")
-        val gistsUrl: String?,
-        @SerializedName("gravatar_id")
-        val gravatarId: String?,
-        @SerializedName("html_url")
-        val htmlUrl: String?,
-        @SerializedName("id")
-        val id: Int?,
-        @SerializedName("login")
-        val login: String?,
-        @SerializedName("node_id")
-        val nodeId: String?,
-        @SerializedName("organizations_url")
-        val organizationsUrl: String?,
-        @SerializedName("received_events_url")
-        val receivedEventsUrl: String?,
-        @SerializedName("repos_url")
-        val reposUrl: String?,
-        @SerializedName("site_admin")
-        val siteAdmin: Boolean?,
-        @SerializedName("starred_url")
-        val starredUrl: String?,
-        @SerializedName("subscriptions_url")
-        val subscriptionsUrl: String?,
-        @SerializedName("type")
-        val type: String?,
-        @SerializedName("url")
-        val url: String?
-    )
-
-     data class RequestedTeam(
-        @SerializedName("description")
-        val description: String?,
-        @SerializedName("html_url")
-        val htmlUrl: String?,
-        @SerializedName("id")
-        val id: Int?,
-        @SerializedName("members_url")
-        val membersUrl: String?,
-        @SerializedName("name")
-        val name: String?,
-        @SerializedName("node_id")
-        val nodeId: String?,
-        @SerializedName("permission")
-        val permission: String?,
-        @SerializedName("privacy")
-        val privacy: String?,
-        @SerializedName("repositories_url")
-        val repositoriesUrl: String?,
-        @SerializedName("slug")
-        val slug: String?,
-        @SerializedName("url")
-        val url: String?
-    )
-
-     data class User(
+    data class User(
         @SerializedName("avatar_url")
         val avatarUrl: String?,
         @SerializedName("events_url")

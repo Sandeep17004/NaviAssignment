@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">NaviAssignment</string>
     <string name="base_url">https://api.github.com/</string>
-    <string name="no_commits">No Commits Found. Retry?</string>
     <string name="created_on">Created on %s at %s</string>
     <string name="closed_on">Closed on %s at %s</string>
     <string name="no_internet">Please connect to the Internet first!</string>
+    <string name="error_message">There seems to be some error. Retry?</string>
 </resources>

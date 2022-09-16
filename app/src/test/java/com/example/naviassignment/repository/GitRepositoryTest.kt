@@ -34,13 +34,13 @@ class GitRepositoryTest : BaseServiceTest() {
     private lateinit var viewModel: GitViewModel
 
     @Mock
-    lateinit var observerClosedPullRequestsLiveData: Observer<NetworkResource<List<GitResponse>>>
+    lateinit var observerClosedPullRequestsLiveData: Observer<MutableList<GitResponse>?>
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         viewModel = GitViewModel(
-            gitRepository, coroutineTestRule.testDispatcher
+            gitRepository
         )
         viewModel.getClosedGitMergeRequestLiveData()
             .observeForever(observerClosedPullRequestsLiveData)

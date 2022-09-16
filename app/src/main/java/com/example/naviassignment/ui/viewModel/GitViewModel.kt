@@ -6,31 +6,49 @@ import androidx.lifecycle.viewModelScope
 import com.example.naviassignment.data.GitResponse
 import com.example.naviassignment.ui.repository.GitRepository
 import com.example.naviassignment.utils.Constants.Companion.COMMIT_TYPE_CLOSED
-import com.example.naviassignment.utils.NetworkResource
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import com.example.naviassignment.utils.SingleLiveEvent
+import com.example.naviassignment.utils.onFailure
+import com.example.naviassignment.utils.onSuccess
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class GitViewModel(
-    private val repository: GitRepository,
-    private var ioDispatcher: CoroutineDispatcher
+    private val repository: GitRepository
 ) : ViewModel() {
-    private val closedMergeRequestLiveData = MutableLiveData<NetworkResource<List<GitResponse>>>()
+    private val closedMergeRequestLiveData = MutableLiveData<MutableList<GitResponse>?>()
+    private var page = 1
+    val isLoading = MutableLiveData(false)
+    val errorEvent = SingleLiveEvent<String>()
+    val showNoContent = MutableLiveData(false)
 
-    fun getClosedGitMergeRequestLiveData(): MutableLiveData<NetworkResource<List<GitResponse>>> {
+    fun getClosedGitMergeRequestLiveData(): MutableLiveData<MutableList<GitResponse>?> {
         return closedMergeRequestLiveData
     }
 
     fun loadClosedGitMergeRequestList() {
-        closedMergeRequestLiveData.postValue(NetworkResource.loading())
         viewModelScope.launch {
-            withContext(ioDispatcher) {
-                val response = repository.loadClosedGitMergeRequestList(COMMIT_TYPE_CLOSED)
-                closedMergeRequestLiveData.postValue(
-                    NetworkResource.success(response.data)
-                )
+            repository.loadClosedGitMergeRequestList(
+                COMMIT_TYPE_CLOSED,
+                itemPerPage = 20,
+                pageNumber = page
+            ).onSuccess { it ->
+                val currentList =
+                    closedMergeRequestLiveData.value?.let { ArrayList(it) } ?: ArrayList()
+                if (it.isNotEmpty()) {
+                    page += 1
+                }
+                val newList = it.toMutableList()
+                currentList.addAll(newList)
+                showNoContent.value = currentList.isEmpty()
+                closedMergeRequestLiveData.value = currentList
+                isLoading.value = false
+            }.onFailure {
+                val errorMessage = (it as? Exception)?.message ?: "Request Failed"
+                errorEvent.postValue(errorMessage)
+                isLoading.postValue(false)
+                showNoContent.postValue(closedMergeRequestLiveData.value.isNullOrEmpty())
             }
         }
     }
 }
+
