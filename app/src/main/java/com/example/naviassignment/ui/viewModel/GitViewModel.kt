@@ -26,6 +26,7 @@ class GitViewModel(
     }
 
     fun loadClosedGitMergeRequestList() {
+        isLoading.value = true
         viewModelScope.launch {
             repository.loadClosedGitMergeRequestList(
                 COMMIT_TYPE_CLOSED,
